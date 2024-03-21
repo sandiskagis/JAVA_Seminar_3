@@ -2,13 +2,13 @@ package model.user;
 
 import service.IPostService;
 
+import java.security.MessageDigest;
+
 
 public abstract class RegisteredUser extends GuestUser implements IPostService{
     //1.variables
     private String username;
     protected String nameAndSurnameOrTitle;
-
-    //TODO izmantot enkodēšanu parolei
     private String password;
 
     //2.get and set
@@ -35,8 +35,19 @@ public abstract class RegisteredUser extends GuestUser implements IPostService{
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String inputPassword) {
+        if(inputPassword != null && inputPassword.matches("[A-Za-z0-9!@#$%^&*]{4,20}")) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(inputPassword.getBytes());
+                this.password = new String(md.digest());
+            } catch (Exception e) {
+                this.password = "admin12345";
+            }
+        }
+        else{
+            this.password = "admin12345";
+            }
     }
 
     //3.constructor
