@@ -61,7 +61,7 @@ public class PrivateUser extends RegisteredUser{
 
 
     @Override
-    public void publishPost(String title, String msg, PostType type) throws Exception {
+    public Post publishPost(String title, String msg, PostType type) throws Exception {
         if(title == null || msg == null || type == null)
             throw new Exception("Problems with input params");
 
@@ -71,6 +71,8 @@ public class PrivateUser extends RegisteredUser{
             privatePosts.add(newPost);
         else
             publicPosts.add(newPost);
+
+        return newPost;
     }
 
     //TODO AddFollower

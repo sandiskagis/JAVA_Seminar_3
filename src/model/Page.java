@@ -6,6 +6,11 @@ public class Page {
     //1. variables
     private String title;
     private String description;
+
+    public ArrayList<Post> getPublicPosts() {
+        return publicPosts;
+    }
+
     private ArrayList<Post> publicPosts = new ArrayList<Post>();
     private ArrayList<Post> privatePosts = new ArrayList<Post>();
 
@@ -19,6 +24,10 @@ public class Page {
             this.title = title;
         else
             this.title =  "------";
+    }
+
+    public ArrayList<Post> getPrivatePosts() {
+        return privatePosts;
     }
 
     public String getDescription(){
